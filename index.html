@@ -113,13 +113,37 @@ src="http://www.youtube.com/embed/iA7pkVA1npc?autoplay=0" frameborder="0" allowf
 					<h2>Get in Touch</h2>
 					<p>Questions? Comments? Movie suggestions? <br />
 					We'd love to hear them.</p>
+
+					<!-- LOL everything is mandatory-->
+					<!--<p>An asterisk (<span class="required_star"> * </span>) indicates a mandatory field.</p>-->
+
 				</header>
-				<form method="post" enctype="text/plain" action="mailto:trevor.peitzman@gmail.com">
+				<script src="feedbackformvalidation.js"></script>
+				<script>
+				required.add('Name','NOT_EMPTY','Name');
+				required.add('Email','EMAIL','Email');
+				required.add('Subject','NOT_EMPTY','Subject');
+				required.add('Message','NOT_EMPTY','Message');
+			//required.add('AntiSpam','NOT_EMPTY','Anti-Spam Question');
+
+				function checkMessageCount() {
+					var maxlen = 1000;
+					var len = document.getElementById('message').value.length;
+					document.getElementById('charsleft').innerHTML = 'You have ' + (maxlen - len) + ' characters remaining';
+				}
+				</script>
+
+				<form method="post" enctype="text/plain" action="assets/php/feedbackformprocess.php">
 					<div class="row 50%">
-						<div class="6u 12u$(mobile)"><input type="text" class="text" name="name" placeholder="Name" /></div>
-						<div class="6u$ 12u$(mobile)"><input type="text" class="text" name="email" placeholder="Email" /></div>
+						<div class="6u 12u$(mobile)">
+							<input type="text" class="text" name="name" placeholder="Name" maxlength="100"/>
+						</div>
+						<div class="6u$ 12u$(mobile)">
+							<input type="text" class="text" name="email" placeholder="Email" maxlength="100"/>
+						</div>
 						<div class="12u$">
-							<textarea name="message" placeholder="Message"></textarea>
+							<textarea name="message" id="message" placeholder="Message" maxlength="1000" onkeyup="checkMessageCount()"></textarea>
+						  <div id="charsleft" class="text">You have 1000 characters remaining</div>
 						</div>
 						<div class="12u$">
 							<ul class="actions">
