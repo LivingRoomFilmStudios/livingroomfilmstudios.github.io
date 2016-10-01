@@ -1755,6 +1755,13 @@
 				background: rgba(58, 57, 57, 0.025);
 			}
 
+/*Video insertion settings*/
+
+	.video {
+		height: 100%;
+		width: 100%;
+	}
+
 /* Box */
 
 	.box {
